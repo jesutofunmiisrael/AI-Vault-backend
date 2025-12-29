@@ -47,39 +47,39 @@ const signup = async (req, res) => {
 }
 
 
-const login = async(req, res)=>{
-    const {password,  email} = req.body
+const login = async (req, res) => {
+  const { password, email } = req.body;
 
-    try {
-       const user = await userModel.findOne({ email }).select("+password")
+  try {
+    const user = await userModel.findOne({ email }).select("+password");
 
-       if(!user){
-        return res.status(400).json({
-            success:false,
-            message:"Email or password incorrcet ❌"
-        })
-       }
-const iscorrect = await bcrypt.compare(password, user.password)
-
-if(!iscorrect){
-    return res.status(403).json({
-        success:false,
-        message:"Email or password is incorrect ❌"
-    })
-}
-const token = jwt.sign({email, id:user._id}, process.env.jwt_secret,{
-  expiresIn:process.env.jwt_exp
-})
-   res.status(200).json({
-    success:true,
-    token
-   })
-    } catch (error) {
-        console.log(error);
-        
-        
+    if (!user || !(await bcrypt.compare(password, user.password))) {
+      return res.status(401).json({
+        success: false,
+        message: "Email or password is incorrect ❌",
+      });
     }
-}
+
+    const token = jwt.sign(
+      { email, id: user._id },
+      process.env.jwt_secret,
+      { expiresIn: process.env.jwt_exp }
+    );
+
+    res.status(200).json({
+      success: true,
+      token,
+      user: { id: user._id, email: user.email },
+      message: "Login successful ✅"
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      success: false,
+      message: "Server error ❌"
+    });
+  }
+};
 
 
 const logout = async (req, res) => {
