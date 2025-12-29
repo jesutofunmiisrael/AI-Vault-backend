@@ -100,7 +100,8 @@ const logout = async (req, res) => {
         return res.status(200).json({
             success: true,
             message: "Logout successfully",
-            token
+            token,
+            user
         });
 
     } catch (error) {
