@@ -1,20 +1,40 @@
-const nodemailer = require ("nodemailer")
+// const nodemailer = require ("nodemailer")
 
-const dotenv = require("dotenv")
-const { model } = require("mongoose")
-dotenv.config()
+// const dotenv = require("dotenv")
+// const { model } = require("mongoose")
+// dotenv.config()
 
-const transporter = nodemailer.createTransport({
+// const transporter = nodemailer.createTransport({
  
 
-        service: "gmail",
-    auth: {
-        user: process.env.APP_EMAIL,
-        pass: process.env.APP_PASS
-    }
+//         service: "gmail",
+//     auth: {
+//         user: process.env.APP_EMAIL,
+//         pass: process.env.APP_PASS
+//     }
+// });
+
+
+const nodemailer = require("nodemailer");
+const dotenv = require("dotenv");
+dotenv.config();
+
+const transporter = nodemailer.createTransport({
+  host: "smtp.gmail.com",
+  port: 587,        // must use 587 on Render
+  secure: false,    // STARTTLS
+  auth: {
+    user: process.env.APP_EMAIL,
+    pass: process.env.APP_PASS, // use an App Password if Gmail
+  },
 });
 
+transporter.verify((err, success) => {
+  if (err) console.error("SMTP connection failed:", err);
+  else console.log("✅ SMTP ready to send emails");
+});
 
+module.exports = transporter;
 
 transporter.verify((err, success) =>{
     if(success){

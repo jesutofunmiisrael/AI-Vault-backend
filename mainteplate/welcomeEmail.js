@@ -27,3 +27,4 @@ const WelcomeEmail = async (name, email) =>{
 }
 
 module.exports = WelcomeEmail
+
