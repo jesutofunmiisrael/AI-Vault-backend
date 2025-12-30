@@ -101,7 +101,7 @@ const logout = async (req, res) => {
             success: true,
             message: "Logout successfully",
             token,
-            user
+        
         });
 
     } catch (error) {
@@ -201,7 +201,6 @@ const resetPassword = async(req, res) =>{
     })
 }
 }
-
 
 
 module.exports =  {signup, login, logout, forgetPassword, resetPassword}
