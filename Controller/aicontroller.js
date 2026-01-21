@@ -18,7 +18,7 @@ const generateImage = async (req, res) => {
       message: "prompt  are required",
     });
   }
-
+ 
   try {
     const response = await openai.responses.create({
       model: "gpt-4.1",
