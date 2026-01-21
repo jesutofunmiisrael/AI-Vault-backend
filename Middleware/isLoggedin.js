@@ -24,7 +24,7 @@ try {
       })
    }
 
-   const { email } = jwt.verify(token, process.env.jwt_secret)
+   const { email } = jwt.verify(token, process.env.JWT_SECRET)
 
 
    const isBlacklisted = await blacklistedTokenModel.findOne({token})
