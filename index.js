@@ -10,7 +10,7 @@ import { fileURLToPath } from "url";
 import dotenv from "dotenv";
 
 import connecToDb from "./Config/ConnectoDb.js";
-import "./Config/Nodemailler.js"; // side effect import
+import "./Config/Nodemailler.js"; 
 import auth from "./Router/Authrouter.js";
 import airouter from "./Router/airouter.js";
 
