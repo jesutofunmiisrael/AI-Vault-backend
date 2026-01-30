@@ -199,8 +199,7 @@ const resetPassword = async(req, res) =>{
       success: false,
       message: "Server error resetting password",
     })
-}
-}
+}}
 
 
 module.exports =  {signup, login, logout, forgetPassword, resetPassword}
