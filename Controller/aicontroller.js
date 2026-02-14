@@ -200,3 +200,4 @@ const generateVideo = async (req, res) => {
 
 module.exports = { generateImage,  generateSpeech,  generateVideo, 
 }
+
